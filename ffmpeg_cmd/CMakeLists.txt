@@ -18,48 +18,17 @@ add_library( # Sets the name of the library.
              # Sets the library as a shared library.
              SHARED
         ${native_srcs2} )
-add_library( avcodec-58
-             SHARED
-             IMPORTED )
-set_target_properties( avcodec-58
-                       PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/libs/armeabi-v7a/libavcodec.so )
-add_library( avfilter-7
-             SHARED
-             IMPORTED )
-set_target_properties( avfilter-7
-                       PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/libs/armeabi-v7a/libavfilter.so )
-add_library( avformat-58
-             SHARED
-             IMPORTED )
-set_target_properties( avformat-58
-                       PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/libs/armeabi-v7a/libavformat.so )
-add_library( avutil-56
-             SHARED
-             IMPORTED )
-set_target_properties( avutil-56
-                       PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/libs/armeabi-v7a/libavutil.so )
-add_library( swresample-3
-             SHARED
-             IMPORTED )
-set_target_properties( swresample-3
-                       PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/libs/armeabi-v7a/libswresample.so )
-add_library( swscale-5
-             SHARED
-             IMPORTED )
-set_target_properties( swscale-5
-                       PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/libs/armeabi-v7a/libswscale.so )
-add_library( postproc-55
+
+
+
+add_library( dzhffmpeg
         SHARED
         IMPORTED )
-set_target_properties( postproc-55
+set_target_properties( dzhffmpeg
         PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_CURRENT_SOURCE_DIR}/libs/armeabi-v7a/libpostproc.so )
+        ${CMAKE_CURRENT_SOURCE_DIR}/libs/armeabi-v7a/libdzhffmpeg.so )
+
+
 
 include_directories( libs/include )
 find_library( # Sets the name of the path variable.
@@ -81,13 +50,7 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 target_link_libraries( # Specifies the target library.
                        ffmpeginvoke
-                       avcodec-58
-                       avfilter-7
-                       avformat-58
-                       avutil-56
-                       swresample-3
-                       swscale-5
-                       postproc-55
+                       dzhffmpeg
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib}  ${android-lib})

@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 
 public class FFmpegRun {
     static {
+        System.loadLibrary("dzhffmpeg");
         System.loadLibrary("ffmpeginvoke");
     }
 
