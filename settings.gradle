@@ -1,0 +1,2 @@
+include ':moudle_app', ':ffmpegcmd'
+project(':ffmpegcmd').projectDir = new File('ffmpeg_cmd')
