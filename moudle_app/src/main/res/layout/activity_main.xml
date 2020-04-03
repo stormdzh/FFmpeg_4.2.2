@@ -10,6 +10,7 @@
 
 
     <Button
+        android:visibility="visible"
         android:id="@+id/mp3ToWav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,11 +18,21 @@
         android:text="mp3转wav" />
 
     <Button
+        android:visibility="visible"
         android:id="@+id/wavToMp3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="wav转mp3" />
+
+
+    <Button
+        android:visibility="visible"
+        android:id="@+id/audioPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="播放音频" />
 
 
 </LinearLayout>

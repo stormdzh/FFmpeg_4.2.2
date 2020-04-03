@@ -14,7 +14,7 @@ message("PROJECT_SOURCE_DIR = ${MY_DIRECTORY_PARENT}")
 include_directories(../${MY_DIRECTORY_PARENT}/ffmpeg-4.2.2)
 
 add_library( # Sets the name of the library.
-             ffmpeginvoke
+             audioplayer
              # Sets the library as a shared library.
              SHARED
         ${native_srcs2} )
@@ -80,7 +80,7 @@ find_library( # Sets the name of the path variable.
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 target_link_libraries( # Specifies the target library.
-                       ffmpeginvoke
+                       audioplayer
                        avcodec-58
                        avfilter-7
                        avformat-58

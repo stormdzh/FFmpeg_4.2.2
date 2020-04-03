@@ -3,6 +3,7 @@ package com.stormdzh.ffmpeg.demo;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.media.AudioTrack;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -10,7 +11,9 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
+import com.stormdzh.ffmpeg.sdk.audio.AudioPlayer;
 import com.stormdzh.ffmpeg.sdk.util.FFmpegRun;
 import com.stormdzh.ffmpeg.sdk.util.MediaUtils;
 
@@ -28,6 +31,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         findViewById(R.id.mp3ToWav).setOnClickListener(this);
         findViewById(R.id.wavToMp3).setOnClickListener(this);
+        findViewById(R.id.audioPlay).setOnClickListener(this);
         String CPU_ABI = android.os.Build.CPU_ABI;
         Log.i("BAI=====", CPU_ABI);
     }
@@ -61,7 +65,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.wavToMp3:
                 wavToMp3();
-                //快进
+                break;
+            case R.id.audioPlay:
+                audioPlay();
                 break;
         }
     }
@@ -71,7 +77,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void wavToMp3() {
 
         File wavFile = new File(Environment.getExternalStorageDirectory(), "3_test.wav");
-        Log.i("dzh", "输入文件存在吗？==》"+wavFile.exists());
+        Log.i("dzh", "输入文件存在吗？==》" + wavFile.exists());
         File mp3File = new File(Environment.getExternalStorageDirectory(), "mp3test.mp3");
         if (mp3File.exists()) {
             mp3File.delete();
@@ -93,7 +99,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void mp3ToWav() {
 
         File mp3File = new File(Environment.getExternalStorageDirectory(), "mp3test.mp3");
-        Log.i("dzh", "输入文件存在吗？==》"+mp3File.exists());
+        Log.i("dzh", "输入文件存在吗？==》" + mp3File.exists());
         File wavFile = new File(Environment.getExternalStorageDirectory(), "wavtest.wav");
         if (wavFile.exists()) {
             wavFile.delete();
@@ -110,6 +116,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Log.i("dzh", "---------------end 耗时" + (System.currentTimeMillis() - time));
             }
         });
+    }
+
+
+    private void audioPlay() {
+
+        File mp3File = new File(Environment.getExternalStorageDirectory(), "3_test.wav");
+//        File mp3File = new File(Environment.getExternalStorageDirectory(), "mp3test.mp3");
+//        File mp3File = new File(Environment.getExternalStorageDirectory(), "bb.mp3");
+
+        AudioPlayer mAudioPlayer = new AudioPlayer();
+        mAudioPlayer.setDataSource(mp3File.getAbsolutePath());
+        mAudioPlayer.play();
+
+//        AudioTrack
     }
 
 }
