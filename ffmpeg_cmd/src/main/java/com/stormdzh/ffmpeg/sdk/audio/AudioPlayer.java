@@ -33,7 +33,6 @@ public class AudioPlayer {
             }
         }).start();
 
-
     }
 
     private native void start(String url);
