@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.4.1)
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for y
 # Gradle automatically packages shared libraries with your APK.
-file(GLOB native_srcs2 "src/main/cpp/*.c")
+file(GLOB native_srcs2 "src/main/cpp/*.cpp")
 include_directories(src/main/cpp)
 include_directories(src/main/h )
 get_directory_property(MY_DIRECTORY_PARENT PARENT_DIRECTORY)
@@ -17,6 +17,7 @@ add_library( # Sets the name of the library.
              audioplayer
              # Sets the library as a shared library.
              SHARED
+        src/main/cpp/DZPacketQueue.cpp
         ${native_srcs2} )
 add_library( avcodec-58
              SHARED
@@ -88,7 +89,12 @@ target_link_libraries( # Specifies the target library.
                        swresample-3
                        swscale-5
                        postproc-55
-                       # Links the target library to the log library
-                       # included in the NDK.
+                       # 链接 android ndk 自带的一些库
+                       android
+                       # 链接 OpenSLES
+                       OpenSLES
+                       log
+                        # Links the target library to the log library
+                        # included in the NDK.
                        ${log-lib}  ${android-lib})
 ######

@@ -3,9 +3,6 @@ package com.stormdzh.ffmpeg.demo;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioTrack;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -13,9 +10,11 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.stormdzh.ffmpeg.sdk.audio.AudioPlayer;
+import com.stormdzh.ffmpeg.sdk.sles.DarrenPlayer;
+import com.stormdzh.ffmpeg.sdk.sles.listener.MediaErrorListener;
+import com.stormdzh.ffmpeg.sdk.sles.listener.MediaPreparedListener;
 import com.stormdzh.ffmpeg.sdk.util.FFmpegRun;
 import com.stormdzh.ffmpeg.sdk.util.MediaUtils;
 
@@ -69,7 +68,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 wavToMp3();
                 break;
             case R.id.audioPlay:
-                audioPlay();
+//                audioPlay();
+                audioSles();
                 break;
         }
     }
@@ -146,6 +146,38 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        //STREAM的意思是由用户在应用程序通过write方式把数据一次一次得写到audiotrack中。这个和我们在socket中发送数据一样，
 //        // 应用层从某个地方获取数据，例如通过编解码得到PCM数据，然后write到audiotrack。
 //        private static int mMode = AudioTrack.MODE_STREAM;
+    }
+
+
+    DarrenPlayer mPlayer;
+
+    private void audioSles() {
+        File mp3File = new File(Environment.getExternalStorageDirectory(), "bb.mp3");
+        mPlayer = new DarrenPlayer();
+
+        mPlayer.setDataSource(mp3File.getAbsolutePath().trim());
+
+        mPlayer.setOnErrorListener(new MediaErrorListener() {
+            @Override
+            public void onError(int code, String msg) {
+                Log.e("TAG", "error code: " + code);
+                Log.e("TAG", "error msg: " + msg);
+                // Java 的逻辑代码
+            }
+        });
+
+//        mPlayer.setOnPreparedListener(new MediaPreparedListener() {
+//            @Override
+//            public void onPrepared() {
+//                Log.e("TAG", "准备完毕");
+//                mPlayer.play();
+//            }
+//        });
+//        mPlayer.prepareAsync();
+
+        mPlayer.prepare();
+        mPlayer.play();
+
     }
 
 }
