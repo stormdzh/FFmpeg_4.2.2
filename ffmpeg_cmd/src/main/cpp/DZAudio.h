@@ -37,6 +37,8 @@ public:
 
     void play();
 
+    void pause();
+
     void initCrateOpenSLES();
 
     int resampleAudio();

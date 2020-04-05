@@ -60,3 +60,10 @@ Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPrepareAsync(JNIEnv *env, jobjec
     }
     env->ReleaseStringUTFChars(url_, url);
 }
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPause(JNIEnv *env, jobject instance) {
+    if (pFFmpeg != NULL) {
+        pFFmpeg->pause();
+    }
+}

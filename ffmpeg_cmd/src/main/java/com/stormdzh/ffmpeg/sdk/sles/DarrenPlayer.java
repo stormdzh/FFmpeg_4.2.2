@@ -56,6 +56,10 @@ public class DarrenPlayer {
         nPlay();
     }
 
+    public void pause(){
+        nPause();
+    }
+
     private native void nPlay();
 
     public void prepare() {
@@ -78,4 +82,6 @@ public class DarrenPlayer {
     private native void nPrepareAsync(String url);
 
     private native void nPrepare(String url);
+
+    private native void nPause();
 }

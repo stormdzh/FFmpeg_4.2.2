@@ -34,5 +34,13 @@
         android:layout_marginTop="20dp"
         android:text="播放音频" />
 
+    <Button
+        android:visibility="visible"
+        android:id="@+id/audioPause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="暂停音频" />
+
 
 </LinearLayout>

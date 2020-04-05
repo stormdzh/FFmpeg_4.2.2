@@ -22,6 +22,12 @@ void DZFFmpeg::play() {
     }
 }
 
+void DZFFmpeg::pause() {
+    if (pAudio != NULL) {
+        pAudio->pause();
+    }
+}
+
 void DZFFmpeg::callPlayerJniError(ThreadMode threadMode, int code, char *msg) {
     // 释放资源
     release();

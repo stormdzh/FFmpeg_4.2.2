@@ -29,6 +29,8 @@ public:
 public:
     void play();
 
+    void pause();
+
     void prepare();
 
     void prepareAsync();

@@ -33,6 +33,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.mp3ToWav).setOnClickListener(this);
         findViewById(R.id.wavToMp3).setOnClickListener(this);
         findViewById(R.id.audioPlay).setOnClickListener(this);
+        findViewById(R.id.audioPause).setOnClickListener(this);
         String CPU_ABI = android.os.Build.CPU_ABI;
         Log.i("BAI=====", CPU_ABI);
     }
@@ -70,6 +71,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.audioPlay:
 //                audioPlay();
                 audioSles();
+                break;
+            case R.id.audioPause:
+//                audioPlay();
+                audioSlesPause();
                 break;
         }
     }
@@ -178,6 +183,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mPlayer.prepare();
         mPlayer.play();
 
+    }
+
+    private void audioSlesPause(){
+        if(mPlayer!=null){
+            mPlayer.pause();
+        }
     }
 
 }

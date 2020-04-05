@@ -4,6 +4,8 @@
 
 #include "DZAudio.h"
 
+SLPlayItf pPlayItf = NULL;
+
 DZAudio::DZAudio(int audioStreamIndex, DZJNICall *pJniCall, AVFormatContext *pFormatContext) {
     this->audioStreamIndex = audioStreamIndex;
     this->pJniCall = pJniCall;
@@ -37,6 +39,13 @@ void *threadReadPacket(void *context) {
         }
     }
     return 0;
+}
+
+void DZAudio::pause() {
+    if (pPlayItf != NULL) {
+        LOGE("暂停视频");
+        (*pPlayItf)->SetPlayState(pPlayItf, SL_PLAYSTATE_PAUSED);
+    }
 }
 
 void DZAudio::play() {
@@ -119,7 +128,7 @@ void DZAudio::initCrateOpenSLES() {
                                                                       &reverbSettings);
     // 3.3 创建播放器
     SLObjectItf pPlayer = NULL;
-    SLPlayItf pPlayItf = NULL;
+//    SLPlayItf pPlayItf = NULL;
     SLDataLocator_AndroidSimpleBufferQueue simpleBufferQueue = {
             SL_DATALOCATOR_ANDROIDSIMPLEBUFFERQUEUE, 2};
     SLDataFormat_PCM formatPcm = {
@@ -202,7 +211,8 @@ void DZAudio::analysisStream(ThreadMode threadMode, AVStream **streams) {
     enum AVSampleFormat in_sample_fmt = pCodecContext->sample_fmt;
     int in_sample_rate = pCodecContext->sample_rate;
     pSwrContext = swr_alloc_set_opts(NULL, out_ch_layout, out_sample_fmt,
-                                     out_sample_rate, in_ch_layout, in_sample_fmt, in_sample_rate, 0, NULL);
+                                     out_sample_rate, in_ch_layout, in_sample_fmt, in_sample_rate,
+                                     0, NULL);
     if (pSwrContext == NULL) {
         // 提示错误
         callPlayerJniError(threadMode, SWR_ALLOC_SET_OPTS_ERROR_CODE, "swr alloc set opts error");
