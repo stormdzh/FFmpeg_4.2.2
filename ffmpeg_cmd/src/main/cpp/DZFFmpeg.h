@@ -40,6 +40,8 @@ public:
     void callPlayerJniError(ThreadMode threadMode, int code, char *msg);
 
     void release();
+
+    void seek(int mesc);
 };
 
 #endif //FFMPEG_4_2_2_DZFFMPEG_H

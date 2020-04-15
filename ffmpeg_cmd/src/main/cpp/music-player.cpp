@@ -33,13 +33,15 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *javaVM, void *reserved) {
 extern "C" JNIEXPORT void JNICALL
 Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPlay(JNIEnv *env, jobject instance) {
     if (pFFmpeg != NULL) {
+//        pFFmpeg->seek(50);
         pFFmpeg->play();
     }
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPrepare(JNIEnv *env, jobject instance, jstring url_) {
+Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPrepare(JNIEnv *env, jobject instance,
+                                                        jstring url_) {
     const char *url = env->GetStringUTFChars(url_, 0);
     if (pFFmpeg == NULL) {
         pJniCall = new DZJNICall(pJavaVM, env, instance);
@@ -51,7 +53,8 @@ Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPrepare(JNIEnv *env, jobject ins
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPrepareAsync(JNIEnv *env, jobject instance, jstring url_) {
+Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPrepareAsync(JNIEnv *env, jobject instance,
+                                                             jstring url_) {
     const char *url = env->GetStringUTFChars(url_, 0);
     if (pFFmpeg == NULL) {
         pJniCall = new DZJNICall(pJavaVM, env, instance);
@@ -65,5 +68,12 @@ extern "C" JNIEXPORT void JNICALL
 Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nPause(JNIEnv *env, jobject instance) {
     if (pFFmpeg != NULL) {
         pFFmpeg->pause();
+    }
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_stormdzh_ffmpeg_sdk_sles_DarrenPlayer_nSeek(JNIEnv *env, jobject instance,jint mesc) {
+    if (pFFmpeg != NULL) {
+        pFFmpeg->seek(mesc);
     }
 }

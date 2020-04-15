@@ -48,6 +48,8 @@ public:
     void callPlayerJniError(ThreadMode threadMode, int code, char *msg);
 
     void release();
+
+    void seekBuffer();
 };
 
 

@@ -59,6 +59,9 @@ public class DarrenPlayer {
     public void pause(){
         nPause();
     }
+    public void seek(int mesc){
+        nSeek(mesc);
+    }
 
     private native void nPlay();
 
@@ -84,4 +87,6 @@ public class DarrenPlayer {
     private native void nPrepare(String url);
 
     private native void nPause();
+
+    private native void nSeek(int mesc);
 }

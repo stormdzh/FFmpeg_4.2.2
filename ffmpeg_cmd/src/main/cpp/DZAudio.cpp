@@ -43,8 +43,19 @@ void *threadReadPacket(void *context) {
 
 void DZAudio::pause() {
     if (pPlayItf != NULL) {
+
+        SLuint32 *pState=NULL;
+        SLresult gSLresult = (*pPlayItf)->GetPlayState(pPlayItf, pState);
+        LOGE("暂停视频==>gSLresult:%d pState:%d ",gSLresult,pState);
+
         LOGE("暂停视频");
         (*pPlayItf)->SetPlayState(pPlayItf, SL_PLAYSTATE_PAUSED);
+
+        SLmillisecond *pMsec=NULL;
+        SLresult mSLresult = (*pPlayItf)->GetDuration(pPlayItf, pMsec);
+        LOGE("暂停视频==>mSLresult:%d pMsec:%d ",mSLresult,pMsec);
+
+
     }
 }
 
@@ -256,4 +267,8 @@ void DZAudio::release() {
         free(pSwrContext);
         pSwrContext = NULL;
     }
+}
+
+void DZAudio::seekBuffer(){
+    avcodec_flush_buffers(pCodecContext);
 }

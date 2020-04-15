@@ -2,6 +2,7 @@
 // Created by tal on 2020-04-04.
 //
 
+#include <locale>
 #include "DZFFmpeg.h"
 #include "DZConstDefine.h"
 
@@ -110,6 +111,25 @@ void DZFFmpeg::prepare(ThreadMode threadMode) {
     // ---------- 重采样 end ----------
     // 回调到 Java 告诉他准备好了
     pJniCall->callPlayerPrepared(threadMode);
+}
+
+
+void DZFFmpeg::seek(int mesc) {
+    if (mesc <= 0) {
+        mesc = 0;
+    }
+
+    if (av_seek_frame(pFormatContext, -1, mesc * AV_TIME_BASE, AVSEEK_FLAG_BACKWARD) < 0) {
+        LOGE("av_seek_frame failed");
+    } else {
+        LOGE("av_seek_frame success");
+    }
+
+    if(pAudio!=NULL){
+        pAudio->seekBuffer();
+    }
+//    av_seek_frame(pFormatContext, -1 , mesc * AV_TIME_BASE, AVSEEK_FLAG_ANY);
+
 }
 
 
